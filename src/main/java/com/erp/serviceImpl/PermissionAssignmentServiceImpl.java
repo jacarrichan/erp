@@ -40,7 +40,7 @@ import com.erp.viewModel.TreeGrid;
  */
 @SuppressWarnings("unchecked")
 @Service("permissionAssignmentService")
-public class PermissionAssignmentServiceImpl implements
+public class PermissionAssignmentServiceImpl extends BaseServiceImpl implements
 		PermissionAssignmentService {
 	@SuppressWarnings("rawtypes")
 	public PublicDao publicDao;
@@ -125,11 +125,12 @@ public class PermissionAssignmentServiceImpl implements
 		return publicDao.count(hql, param);
 	}
 
-	public boolean savePermission(Integer roleId, String checkedIds) {
-		Integer userId = Constants.getCurrendUser().getUserId();
+	public boolean savePermission(Integer userId, Integer roleId,
+			String checkedIds) {
 		Role role = this.getRole(roleId);
 		Map<String, RolePermission> map = new HashMap<String, RolePermission>();
 		// 删除该角色原有权限
+		logger.debug("删除该角色原有权限");
 		Set<RolePermission> rolePermissions = role.getRolePermissions();
 		for (RolePermission rolePermission : rolePermissions) {
 			Integer permissionId = rolePermission.getPermission()
@@ -139,9 +140,11 @@ public class PermissionAssignmentServiceImpl implements
 					Constants.PERSISTENCE_DELETE_STATUS);
 		}
 		// 保存该角色新权限
+		logger.debug("保存该角色新权限");
 		if (null != checkedIds && !"".equals(checkedIds)) {
 			String[] ids = checkedIds.split(",");
 			for (String id : ids) {
+				id = id.trim();
 				RolePermission rolePermission = map.get(id);
 				if (rolePermission != null) {
 					updRolePermission(userId, rolePermission,

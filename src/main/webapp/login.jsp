@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -136,8 +137,8 @@ margin-left: 88px;
 	<!--Login div-->
 	<div class="clear"></div>
 	<div id="versionBar">
-		<div class="copyright">&copy; 版权所有 <span class="tip"><a href="javascript:void(0);" title="sysErp">sy</a>
-				(推荐使用IE9+,谷歌浏览器可以获得更快,更安全的页面响应速度)技术支持:<a href="javascript:void(0);" title="sysErp">sy</a> </span>
+		<div class="copyright">&copy; 版权所有 <span class="tip"><a href="javascript:void(0);" title="Erp">erp</a>
+				(推荐使用IE9+,谷歌浏览器可以获得更快,更安全的页面响应速度)技术支持:<a href="javascript:void(0);" ></a> </span>
 		</div>
 	</div>
 </body>

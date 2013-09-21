@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <script type="text/javascript" charset="utf-8">
 	function logout(b) {
 		/*$.post('systemAction!logout.action', function() {
@@ -40,14 +41,14 @@
 			collapsible : false,
 			minimizable : false,
 			maximizable : false,
-			//href : 'userAction!showUserInfo.action',
+			href : 'userAction!showUserInfo.action',
 			onClose : function() {
 				$(this).window('destroy');
 			}
 		});
 	}
 </script>
-<div style="position: absolute; right: 0px; bottom: 0px; ">
+<div style="position: absolute; right: 0px; bottom: 0px; ">当前用户:<shiro:principal/>
 	<a href="javascript:void(0);" class="easyui-menubutton" menu="#layout_north_kzmbMenu" iconCls="icon-help">控制面板</a> 
 	<a href="javascript:void(0);" class="easyui-menubutton" menu="#layout_north_zxMenu" iconCls="icon-logout">注销</a>
 </div>

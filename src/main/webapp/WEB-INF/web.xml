@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+  <description>erp</description>
+  <display-name>erp2</display-name>
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath:spring.xml,classpath:spring-hibernate.xml</param-value>
+  </context-param>
+  <filter>
+    <filter-name>shiroFilter</filter-name>
+    <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>shiroFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <servlet>
+    <servlet-name>kaptcha</servlet-name>
+    <servlet-class>com.google.code.kaptcha.servlet.KaptchaServlet</servlet-class>
+    <init-param>
+      <description> Border around kaptcha. Legal values are yes or no. </description>
+      <param-name>kaptcha.border</param-name>
+      <param-value>no</param-value>
+    </init-param>
+    <init-param>
+      <description>Color of the border. Legal values are r,g,b (and optional alpha) or white,black,blue. </description>
+      <param-name>kaptcha.border.color</param-name>
+      <param-value>red</param-value>
+    </init-param>
+    <init-param>
+      <description>Thickness of the border around kaptcha. Legal values are > 0. </description>
+      <param-name>kaptcha.border.thickness</param-name>
+      <param-value>5</param-value>
+    </init-param>
+    <init-param>
+      <description>Width in pixels of the kaptcha image. </description>
+      <param-name>kaptcha.image.width</param-name>
+      <param-value>85</param-value>
+    </init-param>
+    <init-param>
+      <description>Height in pixels of the kaptcha image. </description>
+      <param-name>kaptcha.image.height</param-name>
+      <param-value>35</param-value>
+    </init-param>
+    <init-param>
+      <description>The image producer. </description>
+      <param-name>kaptcha.producer.impl</param-name>
+      <param-value>com.google.code.kaptcha.impl.DefaultKaptcha </param-value>
+    </init-param>
+    <init-param>
+      <description>The text producer. </description>
+      <param-name>kaptcha.textproducer.impl</param-name>
+      <param-value>com.google.code.kaptcha.text.impl.DefaultTextCreator</param-value>
+    </init-param>
+    <init-param>
+      <description>The characters that will create the kaptcha. </description>
+      <param-name>kaptcha.textproducer.char.string</param-name>
+      <param-value>abcde2345678gfynmnpwx </param-value>
+    </init-param>
+    <init-param>
+      <description>The number of characters to display. </description>
+      <param-name>kaptcha.textproducer.char.length</param-name>
+      <param-value>4</param-value>
+    </init-param>
+    <init-param>
+      <description>A list of comma separated font names.</description>
+      <param-name>kaptcha.textproducer.font.names</param-name>
+      <param-value>Arial, Courier</param-value>
+    </init-param>
+    <init-param>
+      <description>The size of the font to use. </description>
+      <param-name>kaptcha.textproducer.font.size</param-name>
+      <param-value>23</param-value>
+    </init-param>
+    <init-param>
+      <description>The color to use for the font. Legal values are r,g,b. </description>
+      <param-name>kaptcha.textproducer.font.color</param-name>
+      <param-value>black</param-value>
+    </init-param>
+    <init-param>
+      <description>The noise producer. </description>
+      <param-name>kaptcha.noise.impl</param-name>
+      <param-value>com.google.code.kaptcha.impl.NoNoise </param-value>
+    </init-param>
+    <init-param>
+      <description>The noise color. Legal values are r,g,b. </description>
+      <param-name>kaptcha.noise.color</param-name>
+      <param-value>black</param-value>
+    </init-param>
+    <init-param>
+      <description>The obscurificator implementation. </description>
+      <param-name>kaptcha.obscurificator.impl</param-name>
+      <param-value>com.google.code.kaptcha.impl.ShadowGimpy</param-value>
+    </init-param>
+    <init-param>
+      <description>The background implementation. </description>
+      <param-name>kaptcha.background.impl</param-name>
+      <param-value>com.google.code.kaptcha.impl.DefaultBackground</param-value>
+    </init-param>
+    <init-param>
+      <description>Ending background color. Legal values are r,g,b. </description>
+      <param-name>kaptcha.background.clear.to</param-name>
+      <param-value>white</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>kaptcha</servlet-name>
+    <url-pattern>/Kaptcha.jpg</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <display-name>FCExporter</display-name>
+    <servlet-name>FCExporter</servlet-name>
+    <servlet-class>com.fusioncharts.exporter.servlet.FCExporter</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FCExporter</servlet-name>
+    <url-pattern>/FCExporter</url-pattern>
+  </servlet-mapping>
+  
+  <context-param>
+    <param-name>webAppRootKey</param-name>
+    <param-value>erp</param-value>
+  </context-param>
+  <context-param>
+    <param-name>log4jConfigLocation</param-name>
+    <param-value>classpath:log4j.xml</param-value>
+  </context-param>
+  <context-param>
+    <param-name>log4jRefreshInterval</param-name>
+    <param-value>60000</param-value>
+  </context-param>
+  <listener>
+    <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+  </listener>
+  <filter>
+    <filter-name>druidWebStatFilter</filter-name>
+    <filter-class>com.alibaba.druid.support.http.WebStatFilter</filter-class>
+    <init-param>
+      <param-name>exclusions</param-name>
+      <param-value>/css/*,/js/*,*.js,*.css,/druid*,/attached/*,*.jsp</param-value>
+    </init-param>
+    <init-param>
+      <param-name>principalSessionName</param-name>
+      <param-value>sessionInfo</param-value>
+    </init-param>
+  </filter>
+  <filter>
+    <filter-name>openSessionInViewFilter</filter-name>
+    <filter-class>org.springframework.orm.hibernate4.support.OpenSessionInViewFilter</filter-class>
+    <init-param>
+      <param-name>singleSession</param-name>
+      <param-value>true</param-value>
+    </init-param>
+  </filter>
+  <filter>
+    <filter-name>struts2</filter-name>
+    <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
+  </filter>
+  <filter>
+    <filter-name>encodingFilter</filter-name>
+    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>UTF-8</param-value>
+    </init-param>
+    <init-param>
+      <param-name>forceEncoding</param-name>
+      <param-value>true</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>druidWebStatFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>openSessionInViewFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>struts2</filter-name>
+    <url-pattern>*.action</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>encodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+  <listener>
+    <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+  </listener>
+  <listener>
+    <listener-class>com.erp.listener.SessionListenerHandler</listener-class>
+  </listener>
+  <servlet>
+    <servlet-name>druidStatView</servlet-name>
+    <servlet-class>com.alibaba.druid.support.http.StatViewServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>druidStatView</servlet-name>
+    <url-pattern>/druid/*</url-pattern>
+  </servlet-mapping>
+  <session-config>
+    <session-timeout>15</session-timeout>
+  </session-config>
+  <welcome-file-list>
+    <welcome-file>/login.jsp</welcome-file>
+  </welcome-file-list>
+  <error-page>
+    <error-code>404</error-code>
+    <location>/error/404.jsp</location>
+  </error-page>
+  <error-page>
+    <error-code>500</error-code>
+    <location>/error/500.jsp</location>
+  </error-page>
+</web-app>

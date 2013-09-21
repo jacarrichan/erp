@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd" updateCheck="false">
+ 
+	<defaultCache maxElementsInMemory="10000" eternal="false"
+		overflowToDisk="true" timeToIdleSeconds="500" timeToLiveSeconds="1000"
+		diskPersistent="false" diskExpiryThreadIntervalSeconds="120" />   
+		
+		<cache name="shiroAuthorizationCache"  
+                 maxElementsInMemory="10000"
+                 eternal="false" 
+                 overflowToDisk="true" 
+                 diskPersistent="true"
+                 timeToIdleSeconds="120" 
+                 timeToLiveSeconds="120" 
+                 diskExpiryThreadIntervalSeconds="120" />
+		  <!-- sessioncache -->
+        <!--  <cache name="shiro-activeSessionCache"  
+                 maxElementsInMemory="10000"
+                 eternal="false" 
+                 overflowToDisk="true" 
+                 diskPersistent="true"
+                 timeToIdleSeconds="120" 
+                 timeToLiveSeconds="120" 
+                 diskExpiryThreadIntervalSeconds="120" /> -->
+ 
+         <!-- 权限cache，默认命名shiro.authorizationCache -->
+       <!--  <cache name="shiro.authorizationCache" 
+                 maxElementsInMemory="100"
+                 eternal="false" 
+                 timeToLiveSeconds="120" 
+                 overflowToDisk="true" /> -->
+</ehcache>

@@ -4,8 +4,11 @@
 *.jar
 *.war
 *.ear
+*.log
+*.log.*
 target/*
 .svn/*
 logs/*
 .settings/*
 .*
+str

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
-	xmlns:aop="http://www.springframework.org/schema/aop"
-	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:util="http://www.springframework.org/schema/util"
 	xmlns:cache="http://www.springframework.org/schema/cache"
 	xsi:schemaLocation="
 	http://www.springframework.org/schema/beans 
@@ -18,11 +17,8 @@
 	">
 
 	<!-- JNDI方式配置数据源 -->
-	<!-- 
-	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
-		<property name="jndiName" value="${jndiName}"></property>
-	</bean>
-	 -->
+	<!-- <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean"> 
+		<property name="jndiName" value="${jndiName}"></property> </bean> -->
 
 	<!-- 数据源 -->
 	<bean name="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
@@ -36,16 +32,14 @@
 		<!-- 连接池最大使用连接数量 -->
 		<property name="maxActive" value="20" />
 		<!-- 连接池最大空闲 -->
-<!-- 		<property name="maxIdle" value="20" /> -->
+		<!-- <property name="maxIdle" value="20" /> -->
 		<!-- 连接池最小空闲 -->
 		<property name="minIdle" value="0" />
 		<!-- 获取连接最大等待时间 -->
 		<property name="maxWait" value="60000" />
 
-		<!-- 
-		<property name="poolPreparedStatements" value="true" />
-		<property name="maxPoolPreparedStatementPerConnectionSize" value="33" />
-		 -->
+		<!-- <property name="poolPreparedStatements" value="true" /> <property 
+			name="maxPoolPreparedStatementPerConnectionSize" value="33" /> -->
 
 		<property name="validationQuery" value="${validationQuery}" />
 		<property name="testOnBorrow" value="false" />
@@ -56,99 +50,104 @@
 		<property name="timeBetweenEvictionRunsMillis" value="60000" />
 		<!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
 		<property name="minEvictableIdleTimeMillis" value="25200000" />
-	
+
 		<!-- 打开removeAbandoned功能 -->
 		<property name="removeAbandoned" value="true" />
 		<!-- 1800秒，也就是30分钟 -->
 		<property name="removeAbandonedTimeout" value="1800" />
 		<!-- 关闭abanded连接时输出错误日志 -->
-		<property name="logAbandoned" value="true" /> 
-	
+		<property name="logAbandoned" value="true" />
+
 		<!-- 监控数据库 -->
-		<!-- 
-		<property name="filters" value="stat" />
-		 -->
+		<!-- <property name="filters" value="stat" /> -->
 		<property name="filters" value="mergeStat" />
 	</bean>
 	<!-- ehcache 的配置 -->
-	<bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
-		 <property name="configLocation">    
-           <value>classpath:ehcache.xml</value>    
-        </property>   
+	<bean id="cacheManager"
+		class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+		<property name="configLocation">
+			<value>classpath:ehcache.xml</value>
+		</property>
 	</bean>
-	
+
 	<!-- shiro的配置 -->
-	<bean id="myShiroRealm" class="com.erp.shiro.MyShiroRealm"> 
-    	<!--  用来实现用户名密码的查询 --> 
-    	<property name="hibernateSessionFactory" ref="sessionFactory"/>
-	    <property name="cacheManager" ref="shiroCacheManager"/> 
-	    <property name="authenticationCacheName" value="shiroAuthorizationCache"></property>
-	    <property name="development" value="${development}"></property>
-	    
-  	</bean>
-  	
-  	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager"> 
-  	 	<!-- <property name="sessionMode" value="native" />
-  	 	<property name="sessionManager" ref="sessionManager" />  -->
-   	 	<property name="realm" ref="myShiroRealm"/> 
- 	</bean> 
- 	
- 	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/> 
- 	
-	 <bean id="shiroCacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager"> 
-    	<property name="cacheManager" ref="cacheManager"/> 
-    </bean>  
-    
-	 <bean id="formAuthenticationFilter"   class="org.apache.shiro.web.filter.authc.FormAuthenticationFilter"/>
-	 
-	<!-- 关于session的配置  -->
-	<!-- <bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
-		<property name="sessionDAO" ref="sessionDAO" />
-		<property name="sessionListeners"> 
-			<set><bean class="com.erp.listener.SessionHandler"/> </set> 
-		</property> 
-		<property name="sessionValidationScheduler" ref="sessionValidationScheduler" />
-        <property name="globalSessionTimeout" value="1800000"/>
-		<property name="sessionValidationSchedulerEnabled" value="true"/>
-        <property name="deleteInvalidSessions" value="true"/>
+	<bean id="myShiroRealm" class="com.erp.shiro.MyShiroRealm">
+		<!-- 用来实现用户名密码的查询 -->
+		<property name="hibernateSessionFactory" ref="sessionFactory" />
+		<property name="cacheManager" ref="shiroCacheManager" />
+		<property name="authenticationCacheName" value="shiroAuthorizationCache"></property>
+		<property name="development" value="${development}"></property>
+
 	</bean>
-	
-	<bean id="sessionValidationScheduler" class="org.apache.shiro.session.mgt.ExecutorServiceSessionValidationScheduler">
-	    <property name="interval" value="1800000"/>
-	</bean> 
-	
-	<bean id="sessionDAO" class="org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO">
-		<property name="activeSessionsCacheName" value="shiro-activeSessionCache" />
-	</bean>-->
-	
+	<bean id="simplePermFilter" class="com.erp.shiro.PermissionsAuthorizationFilter"></bean>
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+		<!-- <property name="sessionMode" value="native" /> <property name="sessionManager" 
+			ref="sessionManager" /> -->
+		<property name="realm" ref="myShiroRealm" />
+	</bean>
+
+	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
+
+	<bean id="shiroCacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+		<property name="cacheManager" ref="cacheManager" />
+	</bean>
+
+	<bean id="formAuthenticationFilter"
+		class="org.apache.shiro.web.filter.authc.FormAuthenticationFilter" />
+
+	<!-- 关于session的配置 -->
+	<!-- <bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager"> 
+		<property name="sessionDAO" ref="sessionDAO" /> <property name="sessionListeners"> 
+		<set><bean class="com.erp.listener.SessionHandler"/> </set> </property> <property 
+		name="sessionValidationScheduler" ref="sessionValidationScheduler" /> <property 
+		name="globalSessionTimeout" value="1800000"/> <property name="sessionValidationSchedulerEnabled" 
+		value="true"/> <property name="deleteInvalidSessions" value="true"/> </bean> 
+		<bean id="sessionValidationScheduler" class="org.apache.shiro.session.mgt.ExecutorServiceSessionValidationScheduler"> 
+		<property name="interval" value="1800000"/> </bean> <bean id="sessionDAO" 
+		class="org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO"> <property 
+		name="activeSessionsCacheName" value="shiro-activeSessionCache" /> </bean> -->
+
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
-		<property name="securityManager" ref="securityManager"/>
-		<property name="loginUrl" value="/login.jsp"/> 
-	    <property name="successUrl" value="/index.jsp"/> 
-	    <property name="unauthorizedUrl" value="/error/error.jsp"/> 
-	    <property name="filters"> 
-	       <util:map> 
-	         <entry key="authc" value-ref="formAuthenticationFilter"/> 
-	       </util:map> 
-    	</property> 
-	    <property name="filterChainDefinitions"> 
-	       <value>
-	         /Kaptcha.jpg = anon 
-	       	 /js/** = anon  
-	       	 /css/** = anon  
-	       	 /extend/** = anon
-	       	 /systemAction!load.action =  anon
-             /** = authc  
-	          <!--/login=anon /  /index.jsp=authc
-	          /login.do*=authc  /**=authc  /permission/**=roles[admin]
-	          /logout.do*=anon -->
-	           
-	       </value> 
-	    </property> 
+		<property name="securityManager" ref="securityManager" />
+		<property name="loginUrl" value="/login.jsp" />
+		<property name="successUrl" value="/index.jsp" />
+		<property name="unauthorizedUrl" value="/error/error.jsp" />
+		<property name="filters">
+			<util:map>
+				<entry key="authc" value-ref="formAuthenticationFilter" />
+				<entry key="sperm" value-ref="simplePermFilter" />
+			</util:map>
+<!-- 		从粒度从粗到细排列 -->
+		</property>
+		<property name="filterChainDefinitions">
+			<value>
+				/ = anon
+				/Kaptcha.jpg = anon
+				/js/** = anon
+				/css/** = anon
+				/extend/** = anon
+				/login.jsp = anon
+				/error/** = anon
+				/images/** = anon
+				/bootstrap/** = anon
+				/systemAction!load.action = anon
+				/index.jsp= authc
+				/jsp/** = authc 
+				/layout/** = authc 
+				/themes/** = authc 
+				/attached/** = authc 
+				/** = sperm
+				<!-- /** = authc -->
+				<!--/login=anon / /index.jsp=authc /login.do*=authc /**=authc /permission/**=roles[admin] 
+					/logout.do*=anon -->
+
+			</value>
+		</property>
 	</bean>
-	
+
 	<!-- session工厂 -->
-	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="hibernateProperties">
 			<props>
@@ -168,36 +167,32 @@
 		</property>
 
 		<!-- hbm方式配置 -->
-		<!-- 
-		<property name="mappingDirectoryLocations">
-			<list>
-				<value>classpath:com/erp/model</value>
-			</list>
-		</property>
-		 -->
+		<!-- <property name="mappingDirectoryLocations"> <list> <value>classpath:com/erp/model</value> 
+			</list> </property> -->
 	</bean>
-	
+
 	<!-- 配置事务 -->
-	<bean name="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+	<bean name="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
-	<!-- 注解方式配置事物 
-	<tx:annotation-driven transaction-manager="transactionManager" />-->
-	
+	<!-- 注解方式配置事物 <tx:annotation-driven transaction-manager="transactionManager" 
+		/> -->
+
 	<!-- 拦截器方式配置事物 -->
 	<tx:advice id="transactionAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
-			<tx:method name="add*" propagation="REQUIRED"/>
-			<tx:method name="save*" propagation="REQUIRED"/>
-			<tx:method name="upd*" propagation="REQUIRED"/>
-			<tx:method name="update*" propagation="REQUIRED"/>
-			<tx:method name="modify*" propagation="REQUIRED"/>
-			<tx:method name="edit*" propagation="REQUIRED"/>
-			<tx:method name="del*" propagation="REQUIRED"/>
-			<tx:method name="delete*" propagation="REQUIRED"/>
-			<tx:method name="remove*" propagation="REQUIRED"/>
-			<tx:method name="repair" propagation="REQUIRED"/>
-			<tx:method name="persistence*" propagation="REQUIRED"/>
+			<tx:method name="add*" propagation="REQUIRED" />
+			<tx:method name="save*" propagation="REQUIRED" />
+			<tx:method name="upd*" propagation="REQUIRED" />
+			<tx:method name="update*" propagation="REQUIRED" />
+			<tx:method name="modify*" propagation="REQUIRED" />
+			<tx:method name="edit*" propagation="REQUIRED" />
+			<tx:method name="del*" propagation="REQUIRED" />
+			<tx:method name="delete*" propagation="REQUIRED" />
+			<tx:method name="remove*" propagation="REQUIRED" />
+			<tx:method name="repair" propagation="REQUIRED" />
+			<tx:method name="persistence*" propagation="REQUIRED" />
 
 			<tx:method name="get*" propagation="SUPPORTS" />
 			<tx:method name="find*" propagation="SUPPORTS" />
@@ -207,9 +202,10 @@
 	</tx:advice>
 	<aop:config>
 		<aop:pointcut id="transactionPointcut" expression="execution(* com.erp.service..*(..))" />
-		<aop:advisor pointcut-ref="transactionPointcut" advice-ref="transactionAdvice" />
+		<aop:advisor pointcut-ref="transactionPointcut"
+			advice-ref="transactionAdvice" />
 	</aop:config>
-	
+
 	<!-- 配置druid监控spring jdbc -->
 	<bean id="druid-stat-interceptor"
 		class="com.alibaba.druid.support.spring.stat.DruidStatInterceptor">

@@ -11,7 +11,7 @@
 	</properties>
 	<dependencies>
 		<dependency>
-			<groupId>activation</groupId>
+			<groupId>javax.activation</groupId>
 			<artifactId>activation</artifactId>
 			<version>1.0.2</version>
 		</dependency>
@@ -49,6 +49,12 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
 			<version>3.2.1.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>3.2.1.RELEASE</version>
+			<scope>test</scope>
 		</dependency>
 
 		<!-- QuartzJobBean in spring-context-support.jar -->
@@ -189,7 +195,7 @@
 			<version>1.8.0</version>
 		</dependency>
 		<dependency>
-			<groupId>javamail</groupId>
+			<groupId>javax.mail</groupId>
 			<artifactId>mail</artifactId>
 			<version>1.3.2</version>
 		</dependency>
@@ -199,9 +205,9 @@
 			<version>1.7.1</version>
 		</dependency>
 		<dependency>
-			<groupId>aspectj</groupId>
+			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjweaver</artifactId>
-			<version>1.5.4</version>
+			<version>1.7.1</version>
 		</dependency>
 		<dependency>
 			<groupId>com.alibaba</groupId>
@@ -223,6 +229,13 @@
 			<artifactId>fcexporthandler</artifactId>
 			<version>2.0</version>
 		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
+		</dependency>
+
 	</dependencies>
 	<build>
 		<finalName>erp2</finalName>
@@ -292,6 +305,14 @@
 		<repository>
 			<id>firsthuida</id>
 			<url>http://www.firsthuida.com:2013/nexus/content/groups/public/</url>
+		</repository>
+		<repository>
+			<id>oschina</id>
+			<url>http://maven.oschina.net/content/groups/public/</url>
+		</repository>
+		<repository>
+			<id>maven</id>
+			<url>http://repo1.maven.org/maven2/</url>
 		</repository>
 	</repositories>
 </project>

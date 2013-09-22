@@ -8,6 +8,7 @@
 	<properties>
 		<jetty.version>6.1.24</jetty.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<rapid.version>4.0.5</rapid.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -265,6 +266,14 @@
 			<plugin>
 				<groupId>org.mortbay.jetty</groupId>
 				<artifactId>maven-jetty-plugin</artifactId>
+			</plugin>
+
+			<!-- rapid-plugins -->
+			<plugin>
+				<groupId>com.googlecode.rapid-framework</groupId>
+				<artifactId>rapid-plugins</artifactId>
+				<version>${rapid.version}</version>
+				<extensions>true</extensions>
 			</plugin>
 		</plugins>
 		<resources>

@@ -1,0 +1,1 @@
+本目录放置项目的模板文件，模板基于Freemarker语言，详细请见http://freemarker.sourceforge.net/

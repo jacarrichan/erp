@@ -1,0 +1,60 @@
+${gg.setIgnoreOutput(true)}
+#本文件用于生成列的Enum类
+
+<#assign className = table.className>   
+<#assign classNameLower = className?uncap_first> 
+
+<#list table.columns as column>
+	<#if column.enumColumn>
+		<#assign enumOutputJavaFile = gg.outRoot+"/java_src/"+basepackage_dir+"/model/enums/"+column.enumClassName+".java"/>
+		<@genEnumClassBody column/>
+		${gg.generateFile(enumOutputJavaFile,enumClassBody)}
+	</#if>
+</#list>
+
+<#macro genEnumClassBody column>
+<#assign enumClassBody>
+
+package ${basepackage}.model.enums;
+
+import java.util.LinkedHashMap;
+
+import cn.org.rapid_framework.lang.enums.EnumBase;
+import cn.org.rapid_framework.lang.enums.EnumBaseUtils;
+
+public enum ${column.enumClassName} implements EnumBase<${column.simpleJavaType}>{
+	<#list column.enumList as item>
+	${item.enumAlias}(new ${column.simpleJavaType}("${item.enumKey}"),"${item.enumDesc}")<#if item_has_next>,</#if>
+	</#list>
+	;
+	
+	private final ${column.simpleJavaType} code;
+	private final String desc;
+	${column.enumClassName}(${column.simpleJavaType} code,String desc) {
+		this.code = code;
+		this.desc = desc;
+	}
+	
+	public ${column.simpleJavaType} getCode() {
+		return code;
+	}
+
+	public String getDesc() {
+		return desc;
+	}
+
+	public static ${column.enumClassName} getByCode(${column.simpleJavaType} code) {
+		return EnumBaseUtils.getByCode(code, values());
+	}
+	
+	public static ${column.enumClassName} getRequiredByCode(${column.simpleJavaType} code) throws IllegalArgumentException {
+		return EnumBaseUtils.getRequiredByCode(code, values());
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static LinkedHashMap<${column.simpleJavaType}, String> toMap() {
+	    return EnumBaseUtils.toMap(values());
+	}	
+}
+</#assign>
+</#macro>

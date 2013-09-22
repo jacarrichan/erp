@@ -12,6 +12,6 @@
 	<context:property-placeholder location="classpath:config.properties" />
 
 	<!-- 自动扫描dao和service包(自动注入) -->
-	<context:component-scan base-package="com.erp.daoImpl,com.erp.serviceImpl" />
+	<context:component-scan base-package="com.palmelf.erp.daoImpl,com.palmelf.erp.serviceImpl" />
 
 </beans>

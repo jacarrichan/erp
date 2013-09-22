@@ -32,13 +32,13 @@
 	<package name="default-package" extends="convention-default">
 			<interceptors>
 			<!-- 字符集拦截器 -->
-			<interceptor name="encodingInterceptor" class="com.erp.interceptor.EncodingInterceptor" />
+			<interceptor name="encodingInterceptor" class="com.palmelf.erp.interceptor.EncodingInterceptor" />
 			<interceptor-stack name="encodingStack">
 				<interceptor-ref name="defaultStack"></interceptor-ref>
 				<interceptor-ref name="encodingInterceptor"></interceptor-ref>
 			</interceptor-stack>
 			<!-- session拦截器 -->
-			<interceptor name="sessionInterceptor" class="com.erp.interceptor.SessionInterceptor" />
+			<interceptor name="sessionInterceptor" class="com.palmelf.erp.interceptor.SessionInterceptor" />
 			<interceptor-stack name="sessionStack">
 				<interceptor-ref name="encodingStack"></interceptor-ref>
 				<interceptor-ref name="sessionInterceptor">
@@ -46,7 +46,7 @@
 				</interceptor-ref>
 			</interceptor-stack>
 			<!-- 权限拦截器 -->
-			<!--<interceptor name="authInterceptor" class="com.erp.interceptor.AuthInterceptor" />
+			<!--<interceptor name="authInterceptor" class="com.palmelf.erp.interceptor.AuthInterceptor" />
 			<interceptor-stack name="authStack">
 				<interceptor-ref name="sessionStack"></interceptor-ref>
 				<interceptor-ref name="authInterceptor">

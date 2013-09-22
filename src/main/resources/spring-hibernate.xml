@@ -71,7 +71,7 @@
 	</bean>
 
 	<!-- shiro的配置 -->
-	<bean id="myShiroRealm" class="com.erp.shiro.MyShiroRealm">
+	<bean id="myShiroRealm" class="com.palmelf.erp.shiro.MyShiroRealm">
 		<!-- 用来实现用户名密码的查询 -->
 		<property name="hibernateSessionFactory" ref="sessionFactory" />
 		<property name="cacheManager" ref="shiroCacheManager" />
@@ -79,7 +79,7 @@
 		<property name="development" value="${development}"></property>
 
 	</bean>
-	<bean id="simplePermFilter" class="com.erp.shiro.PermissionsAuthorizationFilter"></bean>
+	<bean id="simplePermFilter" class="com.palmelf.erp.shiro.PermissionsAuthorizationFilter"></bean>
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
 		<!-- <property name="sessionMode" value="native" /> <property name="sessionManager" 
 			ref="sessionManager" /> -->
@@ -98,7 +98,7 @@
 	<!-- 关于session的配置 -->
 	<!-- <bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager"> 
 		<property name="sessionDAO" ref="sessionDAO" /> <property name="sessionListeners"> 
-		<set><bean class="com.erp.listener.SessionHandler"/> </set> </property> <property 
+		<set><bean class="com.palmelf.erp.listener.SessionHandler"/> </set> </property> <property 
 		name="sessionValidationScheduler" ref="sessionValidationScheduler" /> <property 
 		name="globalSessionTimeout" value="1800000"/> <property name="sessionValidationSchedulerEnabled" 
 		value="true"/> <property name="deleteInvalidSessions" value="true"/> </bean> 
@@ -162,7 +162,7 @@
 		<!-- 注解方式配置 -->
 		<property name="packagesToScan">
 			<list>
-				<value>com.erp.model</value>
+				<value>com.palmelf.erp.model</value>
 			</list>
 		</property>
 
@@ -201,7 +201,7 @@
 		</tx:attributes>
 	</tx:advice>
 	<aop:config>
-		<aop:pointcut id="transactionPointcut" expression="execution(* com.erp.service..*(..))" />
+		<aop:pointcut id="transactionPointcut" expression="execution(* com.palmelf.erp.service..*(..))" />
 		<aop:advisor pointcut-ref="transactionPointcut"
 			advice-ref="transactionAdvice" />
 	</aop:config>
@@ -214,7 +214,7 @@
 		scope="prototype">
 		<property name="patterns">
 			<list>
-				<value>com.erp.service.*</value>
+				<value>com.palmelf.erp.service.*</value>
 			</list>
 		</property>
 	</bean>

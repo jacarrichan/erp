@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
+<hibernate-reverse-engineering>
+	<!-- 用于反向生成类文件的配置，与项目启动时使用的数据库连接无关 -->
+	<table-filter match-name="users"></table-filter>
+</hibernate-reverse-engineering>

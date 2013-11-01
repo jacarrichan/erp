@@ -8,11 +8,10 @@
 	<properties>
 		<jetty.version>6.1.24</jetty.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<rapid.version>4.0.5</rapid.version>
 	</properties>
 	<dependencies>
 		<dependency>
-			<groupId>javax.activation</groupId>
+			<groupId>activation</groupId>
 			<artifactId>activation</artifactId>
 			<version>1.0.2</version>
 		</dependency>
@@ -50,12 +49,6 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
 			<version>3.2.1.RELEASE</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-test</artifactId>
-			<version>3.2.1.RELEASE</version>
-			<scope>test</scope>
 		</dependency>
 
 		<!-- QuartzJobBean in spring-context-support.jar -->
@@ -196,7 +189,7 @@
 			<version>1.8.0</version>
 		</dependency>
 		<dependency>
-			<groupId>javax.mail</groupId>
+			<groupId>javamail</groupId>
 			<artifactId>mail</artifactId>
 			<version>1.3.2</version>
 		</dependency>
@@ -206,9 +199,9 @@
 			<version>1.7.1</version>
 		</dependency>
 		<dependency>
-			<groupId>org.aspectj</groupId>
+			<groupId>aspectj</groupId>
 			<artifactId>aspectjweaver</artifactId>
-			<version>1.7.1</version>
+			<version>1.5.4</version>
 		</dependency>
 		<dependency>
 			<groupId>com.alibaba</groupId>
@@ -231,12 +224,35 @@
 			<version>2.0</version>
 		</dependency>
 		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>3.2.1.RELEASE</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.11</version>
 			<scope>test</scope>
 		</dependency>
-
+		<dependency>
+			<groupId>org.apache.struts</groupId>
+			<artifactId>struts2-config-browser-plugin</artifactId>
+			<version>2.3.8</version>
+		</dependency>
+		<!-- 配合hibernate3-maven-plugin生成pojo和hbm文件 -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-tools</artifactId>
+			<version>3.2.4.1.GA</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>text</artifactId>
+					<groupId>org.eclipse.jface</groupId>
+				</exclusion>
+			</exclusions>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>erp2</finalName>
@@ -267,13 +283,51 @@
 				<groupId>org.mortbay.jetty</groupId>
 				<artifactId>maven-jetty-plugin</artifactId>
 			</plugin>
-
-			<!-- rapid-plugins -->
 			<plugin>
-				<groupId>com.googlecode.rapid-framework</groupId>
-				<artifactId>rapid-plugins</artifactId>
-				<version>${rapid.version}</version>
-				<extensions>true</extensions>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>hibernate3-maven-plugin</artifactId>
+				<version>2.2</version>
+				<configuration>
+					<!-- 命令:mvn hibernate3:hbm2hbmxml hibernate3:hbm2java -->
+					<!-- 如果生成的hbm文件注释有乱码,说明你用了原版的hibernate-tools -->
+					<components>
+						<component>
+							<name>hbm2hbmxml</name>
+							<implementation>jdbcconfiguration</implementation>
+							<outputDirectory>target/generated-resources/hibernate3</outputDirectory>
+						</component>
+						<component>
+							<name>hbm2dao</name>
+							<implementation>jdbcconfiguration</implementation>
+							<outputDirectory>target/generated-sources/hibernate3</outputDirectory>
+						</component>
+						<component>
+							<name>hbm2java</name>
+							<implementation>jdbcconfiguration</implementation>
+							<outputDirectory>target/generated-sources/hibernate3</outputDirectory>
+						</component>
+					</components>
+					<componentProperties>
+						<revengfile>src/main/resources/hibernate.reveng.xml</revengfile>
+						<!-- <propertyfile>src/main/resources/hibernate.properties</propertyfile> -->
+						<configurationfile>src/main/resources/hibernate.cfg.xml</configurationfile>
+						<packagename>com.palmelf.hr.bean</packagename>
+						<jdk5>true</jdk5>
+						<ejb3>false</ejb3>
+					</componentProperties>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>cglib</groupId>
+						<artifactId>cglib-nodep</artifactId>
+						<version>2.2.2</version>
+					</dependency>
+					<dependency>
+						<groupId>mysql</groupId>
+						<artifactId>mysql-connector-java</artifactId>
+						<version>5.1.25</version>
+					</dependency>
+				</dependencies>
 			</plugin>
 		</plugins>
 		<resources>
@@ -283,9 +337,7 @@
 				<directory>src/main/resources</directory>
 				<filtering>true</filtering>
 				<includes>
-					<!-- 得把模板文件也复制过去 -->
-					<include>**/*.include</include>
-					<include>**/*.java</include>
+					<include>*.xml</include>
 					<include>**/*.xml</include>
 					<include>**/*.properties</include>
 				</includes>
@@ -296,11 +348,16 @@
 				<includes>
 					<include>**/*.xml</include>
 				</includes>
-				<filtering>false</filtering>
+				<filtering>true</filtering>
 			</resource>
 		</resources>
 	</build>
 	<repositories>
+		<repository>
+			<id>myfirst-cmcc</id>
+			<url>http://myfirst-cmcc.googlecode.com/svn/maven-repo/releases/</url>
+			<layout>default</layout>
+		</repository>
 		<repository>
 			<id>sonatype</id>
 			<url>http://repository.sonatype.org/content/groups/forge/</url>
@@ -316,14 +373,6 @@
 		<repository>
 			<id>firsthuida</id>
 			<url>http://www.firsthuida.com:2013/nexus/content/groups/public/</url>
-		</repository>
-		<repository>
-			<id>oschina</id>
-			<url>http://maven.oschina.net/content/groups/public/</url>
-		</repository>
-		<repository>
-			<id>maven</id>
-			<url>http://repo1.maven.org/maven2/</url>
 		</repository>
 	</repositories>
 </project>

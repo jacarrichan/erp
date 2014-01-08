@@ -3,5 +3,7 @@
  * Web Site: http://www.rapid-framework.org.cn
  * Google Code: http://code.google.com/p/rapid-framework/
  * Since 2008 <#if now??>- ${now?string('yyyy')}</#if>
+ * ${os.arch}
+ * ${java.vendor}
  */
 

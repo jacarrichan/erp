@@ -1,4 +1,5 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java"  pageEncoding="utf-8" %>
+<%@ page import="java.util.*"%>
 <script type="text/javascript" charset="utf-8">
 	var centerTabs;
 	var tabsMenu;

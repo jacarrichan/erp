@@ -1,4 +1,5 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ page language="java"  pageEncoding="utf-8" %>
+<%@ page import="java.util.*"%>
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <script type="text/javascript" charset="utf-8">
 	function logout(b) {

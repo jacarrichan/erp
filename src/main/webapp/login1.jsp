@@ -1,4 +1,9 @@
-<%@ page language="java" import="java.util.*,com.palmelf.erp.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java"  pageEncoding="utf-8" %>
+<%@ page import="java.util.*"%>
+<%@ page import="java.lang.String"%>
+<%@ page import="java.lang.Math"%>
+<%@ page import="com.palmelf.erp.util.*"%>
+
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";

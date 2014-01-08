@@ -1,4 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
+<%@ page import="java.lang.String"%>
+<%@ page import="java.lang.Math"%>
 <!DOCTYPE html>
 <html>
 <head>

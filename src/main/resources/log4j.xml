@@ -60,7 +60,7 @@
 		<param name="BufferSize" value="128" />
 		<param name="SMTPHost" value="smtp.126.com" />
 		<param name="SMTPUsername" value="system_report@126.com" />
-		<param name="SMTPPassword" value="cmcc123456!" />
+		<param name="SMTPPassword" value="" />
 		<param name="From" value="system_report@126.com" />
 		<param name="To" value="772929989@qq.com" />
 		<param name="Subject" value="ERP项目异常记录" />

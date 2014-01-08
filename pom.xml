@@ -250,6 +250,10 @@
 					<artifactId>text</artifactId>
 					<groupId>org.eclipse.jface</groupId>
 				</exclusion>
+				<exclusion>
+					<artifactId>asm</artifactId>
+					<groupId>asm</groupId>
+				</exclusion>
 			</exclusions>
 			<scope>test</scope>
 		</dependency>

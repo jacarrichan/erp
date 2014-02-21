@@ -14,7 +14,7 @@ java  struts2 hibernate
 在hibernate.reveng.xml配置好需要生成hibernate需要的pojo和hbm的表名后,
 执行 mvn hibernate3:hbm2hbmxml hibernate3:hbm2java  命令,就可以得到了。
 
-#欢迎提交pull  requesr
+#欢迎提交pull  request
 ------------------------------------------------------------------------------
 java struts2 hibernate 
 

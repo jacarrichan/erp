@@ -1,7 +1,7 @@
-erp1
+ERP
 ====
 
-java  struts2 hibernate  
+  struts2+spring+hibernate  
 
 
 

@@ -14,6 +14,10 @@ ERP
 在hibernate.reveng.xml配置好需要生成hibernate需要的pojo和hbm的表名后,
 执行 mvn hibernate3:hbm2hbmxml hibernate3:hbm2java  命令,就可以得到了。
 
+
+![用户管理](https://raw.github.com/jacarrichan/erp/master/readme.jpg "")
+
+
 #欢迎提交pull  request
 ------------------------------------------------------------------------------
 java struts2 hibernate 

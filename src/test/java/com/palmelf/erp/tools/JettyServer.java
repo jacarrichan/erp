@@ -19,10 +19,11 @@ public class JettyServer {
 	 * @throws Exception
 	 */
 	public static void main(String[] args) throws Exception {
-		Server server = buildNormalServer(8081, "/");
+		Server server = buildNormalServer(8099, "/");
 		// URLencoding设置(防止POST和Get请求乱码),tomcat也要设置
 		server.setAttribute("org.eclipse.jetty.util.URI.charset", "UTF-8");
 		server.start();
+		System.out.print("------------------------------");
 	}
 
 	/**

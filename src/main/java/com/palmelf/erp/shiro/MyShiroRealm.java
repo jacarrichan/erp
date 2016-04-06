@@ -153,6 +153,7 @@ public class MyShiroRealm extends AuthorizingRealm {
 
 	// 验证码校验
 	protected boolean doCaptchaValidate(CaptchaUsernamePasswordToken token) {
+		/*
 		String captcha = (String) ServletActionContext
 				.getRequest()
 				.getSession()
@@ -167,6 +168,7 @@ public class MyShiroRealm extends AuthorizingRealm {
 		if (captcha != null && !captcha.equalsIgnoreCase(token.getCaptcha())) {
 			throw new IncorrectCaptchaException("验证码错误！");
 		}
+		*/
 		return true;
 	}
 }
